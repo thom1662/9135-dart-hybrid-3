@@ -19,18 +19,17 @@ var profs = (jsonDecode(json) as List)
   .map((key, value) => MapEntry(key, value.toString()))) //change values to string
   .toList();
 
-  //assert(profs is List<Map<String, String>>);
-  //var personOne = profs[0];
-  //print(personOne);
-
-
-  //call Students constructor, passing the List
   var folks = Students(profs);
-  //folks.output();
-  //folks.sort('last');
+  folks.output();
+
+  folks.sort('first');
+  folks.output();
+
   folks.remove('first', 'Tony');
   folks.output();
-  //call all methods once
+
+  folks.plus({"first":"Stephanie", "last":"Teacher", "email":"steach@gmail.com"});
+  folks.output();
 }
 
 
@@ -59,6 +58,7 @@ class Students {
     for (var person in people){
       print(person);
     }
+    print('\n');
   }
 
 //add a new person to the list
