@@ -26,6 +26,9 @@ var profs = (jsonDecode(json) as List)
 
   //call Students constructor, passing the List
   var folks = Students(profs);
+  //folks.output();
+  //folks.sort('last');
+  folks.remove('first', 'Tony');
   folks.output();
   //call all methods once
 }
@@ -38,28 +41,35 @@ class Students {
 //constructor
   Students(this.people);
 
-  //sort method, based on field name that is passed
+//sort the list by a field, 3 ways
   void sort(String field){
-
+    if (field == 'first'){
+      people.sort((a,b) => a[field]!.compareTo(b[field]!)); //alphabetical
+    }
+    else if (field == 'last'){
+      people.sort((a,b) => a[field]!.length.compareTo(b[field]!.length)); //length of last name
+    }
+    else if (field == 'email') {
+      people.sort((a,b) => b[field]!.compareTo(a[field]!)); //reverse alphabetical
+    }
   }
 
-//method to loop and print each item in the list
+//loop and print each item in the list
   void output(){
     for (var person in people){
       print(person);
     }
   }
 
-//method to add a new person to the list
+//add a new person to the list
   void plus(Map<String, String> person){
-
+    people.add(person);
   }
 
-//method to remove a person from the list
-  void remove(String field){
-//use removeWhere() method
+//remove a person from the list
+  void remove(String field, String value){ //needed to pass the key and value
+    people.removeWhere((person) => person[field] == value);
   }
-
 
 }
 
